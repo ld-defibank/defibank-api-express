@@ -1,6 +1,6 @@
-# 链上监控服务
+# defibank 公共API
 
-本项目提供一种聚合型的多链异动监控转发服务。
+本项目提供defibank的公共数据缓存服务。
 
 ## 配置
 
@@ -14,26 +14,27 @@
   "DB_PASS": "数据库密码",
   "COOKIE_SECRET": "cookie密钥",
   "COOKIE_PREFIX": "cookie前缀",
-  "UPLOAD_DIST": "上传文件本地地址",
-  "UPLOAD_STATIC_PATH": "上传静态链接地址",
-  "STATIC_HASH": "前端静态文件hash版本",
+  "INFURA_KEY": "INFURA project id",
 
-  "PASSPORT": {
-    "FACEBOOK_APP_ID": "",
-    "FACEBOOK_APP_SECRET": "",
-    "FACEBOOK_CALLBACK_URL": "",
-    "GITHUB_CLIENT_ID": "",
-    "GITHUB_CLIENT_SECRET": "",
-    "GITHUB_CALLBACK_URL": "",
-    "YOUTUBE_CLIENT_ID": "",
-    "YOUTUBE_CLIENT_SECRET": "",
-    "YOUTUBE_CALLBACK_URL": "",
-    "GOOGLE_CLIENT_ID": "",
-    "GOOGLE_CLIENT_SECRET": "",
-    "GOOGLE_CALLBACK_URL": "",
-    "TELEGRAM_BOT_TOKEN": ""
-  }
+  "ADDRESS_CHAINLINK_PROXY_PRICE_PROVIDER": "",
+  "ADDRESS_LENDING_POOL": "",
+  "ADDRESS_LENDING_POOL_CORE": "",
+  "ADDRESS_LENDING_POOL_DATA_PROVIDER": "",
+
+  "TOKENS": {
+    "USDT": {
+      "tokenAddress": "",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6
+    },
+    "ETH": {
+      "tokenAddress": "",
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "decimals": 18
+    }
+  },
+  "ETH_EXPORER_URL": "https://rinkeby.etherscan.io/"
 }
 ```
-
-`PASSPORT`部分见`/docs/passport`。
