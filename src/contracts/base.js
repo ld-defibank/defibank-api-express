@@ -4,7 +4,7 @@ import ERC20_ABI from './erc20_abi.json';
 const MAX_VAL = '115792089237316195423570985008687907853269984665640564039457584007913129639935';
 
 export default class Contract {
-  constructor(web3, ABI, address, enableLog = true) {
+  constructor(web3, ABI, address, enableLog = false) {
     this.ABI = ABI;
     this.address = address;
     this.contract = new web3.eth.Contract(ABI, toChecksumAddress(address));
@@ -12,6 +12,7 @@ export default class Contract {
   }
 
   log(event, method, extraData = {}) {
+    if (!this.enableLog) return;
     console.groupCollapsed(`合约调用 - ${event} - ${method}`);
     console.table({
       合约地址: { value: this.address },
