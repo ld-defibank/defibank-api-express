@@ -7,8 +7,8 @@
     "start": "npm run parse && node -r ./.env.js ./lib/start.js",
     "job": "npm run parse && node -r ./.env.js ./lib/job.js",
     "import": "npm run parse && node -r ./.env.js ./lib/db/import.js",
-    "upload": "./upload.sh",
-    "upload_server": "http-server ./upload"
+    "pm2_start_job": "pm2 start --name defibank_job npm -- run job",
+    "pm2_start_server": "pm2 start --name defibank_server npm -- run start"
   },
   "dependencies": {
     "accesscontrol": "^2.2.1",
