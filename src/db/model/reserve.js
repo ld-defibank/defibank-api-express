@@ -19,14 +19,17 @@ class Reserve extends Model {
 
   static fetch(tokenAddress) {
     const Token = Reserve.sequelize.model('token');
+    const timestamp = new Date();
+    const hour = timestamp.getUTCHours();
+    const day = timestamp.getUTCDay();
+    const date = timestamp.getUTCDate();
+
     return Token.findOne({
       where: { tokenAddress },
     }).then((token) => {
       if (!token) return [null, null];
       const tokenId = token.id;
-      const now = new Date();
-      const tag = Reserve.getTag(token.symbol, now.getTime());
-      const hour = now.getUTCHours();
+      const tag = Reserve.getTag(token.symbol, timestamp.getTime());
 
       return Reserve.findOrCreate({
         where: { tag },
@@ -34,10 +37,17 @@ class Reserve extends Model {
           tokenId,
           tag,
           hour,
+          date,
+          day,
+          timestamp,
         },
       }).then(([reserve]) => [reserve, token]);
     }).then(([reserve, token]) => {
       const contract = new LendingPoolContract();
+
+      if (reserve.state === RESERVE_STATE.IMPORTED) {
+        return reserve;
+      }
 
       return Promise.all([
         contract.getReserveData(token.tokenAddress),
@@ -71,6 +81,10 @@ class Reserve extends Model {
 
         return reserve.update({
           state: RESERVE_STATE.IMPORTED,
+          timestamp,
+          hour,
+          day,
+          date,
           // ReserveData
           totalLiquidity,
           availableLiquidity,
@@ -104,6 +118,9 @@ class Reserve extends Model {
       id: this.id,
       tag: this.tag,
       hour: this.hour,
+      day: this.day,
+      date: this.date,
+      timestamp: this.timestamp,
       tokenId: this.tokenId,
       state: this.state,
       totalLiquidity: this.totalLiquidity,
@@ -145,12 +162,24 @@ function model(sequelize) {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    day: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    date: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    timestamp: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
     tokenId: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
     state: {
-      type: Sequelize.ENUM(Object.keys(RESERVE_STATE)),
+      type: Sequelize.ENUM(Object.values(RESERVE_STATE)),
       allowNull: false,
       defaultValue: RESERVE_STATE.CREATED,
     },
