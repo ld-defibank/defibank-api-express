@@ -1,4 +1,4 @@
-import ERROR from '../const/ERROR.json';
+import ERROR from '@const/ERROR';
 
 function check(target, arg) {
   const val = target[arg];

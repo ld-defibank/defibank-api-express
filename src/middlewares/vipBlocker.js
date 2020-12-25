@@ -1,4 +1,4 @@
-import ERROR from '../const/ERROR.json';
+import ERROR from '@const/ERROR';
 
 function vipBlocker(req, res, next) {
   const { jwt_user } = req;
