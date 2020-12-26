@@ -39,6 +39,30 @@
 }
 ```
 
+## 部署启动
+
+### 导入币种信息
+
+在`.env.json`中补全`TOKENS`信息，并执行`import`脚本。
+```shell
+$ npm run import
+```
+
+### 启动定时任务(pm2)
+```shell
+$ npm run pm2_start_job
+```
+
+### 启动web服务(pm2)
+```shell
+$ npm run pm2_start_server
+```
+
+### 查看进程
+```shell
+$ pm2 list
+```
+
 ## API
 
 ### Reserve历史
