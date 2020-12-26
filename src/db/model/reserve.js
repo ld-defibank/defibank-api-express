@@ -147,6 +147,9 @@ class Reserve extends Model {
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };
+    if (this.token) {
+      ret.token = this.token.getData();
+    }
     return ret;
   }
 }

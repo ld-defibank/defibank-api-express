@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import '@utils/proxy';
 
 import indexRouter from './routes/index';
+import historyRouter from './routes/history';
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 }));
 
 app.use('/api/v1/', indexRouter);
+app.use('/api/v1/history', historyRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
