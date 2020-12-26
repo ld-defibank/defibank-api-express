@@ -253,6 +253,16 @@ function model(sequelize) {
   }, {
     sequelize,
     modelName: 'reserve',
+    indexes: [{
+      fields: ['hour'],
+      name: 'hour',
+    }, {
+      fields: ['day'],
+      name: 'day',
+    }, {
+      fields: ['date'],
+      name: 'date',
+    }],
   });
   return Reserve;
 }
