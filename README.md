@@ -38,3 +38,44 @@
   "ETH_EXPORER_URL": "https://rinkeby.etherscan.io/"
 }
 ```
+
+## API
+
+### Reserve历史
+
+此接口定期记录`LendingPool`合约的`getReserveData`和`getReserveConfigurationData`方法返回。并提供按年月日等分析。
+
+```
+GET /api/v1/history/reserve.json
+```
+
+入参
+
+```
+?token_address=0x&filter=&limit=
+```
+
+| 参数 | 必填 | 默认值 | 解释 |
+| - | - | - | - |
+| token_address | 是 | - | 币种地址 |
+| filter | 否 | hour | 维度，month,week,day,hour |
+| limit | 否 | 10 | 返回条数 |
+
+返回
+
+```
+200
+```
+```
+{
+  "success": true,
+  "data": {
+    "token": {
+      ...
+    },
+    "history": [{
+      ...
+    }]
+  }
+}
+```
