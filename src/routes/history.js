@@ -37,7 +37,7 @@ router.get('/reserve.json', argsCheck('token_address'), (req, res, next) => {
     where.tokenId = id;
     Reserve.findAll({
       where,
-      limit: limit || 10,
+      limit: parseInt(limit, 10) || 10,
       order: [
         ['id', 'DESC'],
       ],
