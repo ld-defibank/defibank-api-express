@@ -125,7 +125,7 @@ GET /api/v1/aggregation/reserve.json
 | 参数 | 必填 | 默认值 | 解释 |
 | - | - | - | - |
 | token_address | 是 | - | 币种地址 |
-| targets | 是 | - | 聚合指标，liquidity_rate \| variable_borrow_rate \| stable_borrow_rate |
+| targets | 是 | - | 聚合指标，liquidity_rate \| variable_borrow_rate \| stable_borrow_rate，可用逗号分隔传递多个指标 |
 | command | 是 | - | 聚合指令，avg |
 | filter | 否 | hour | 维度，month \| week \| day \| hour |
 | limit | 否 | 10 | 返回条数 |
