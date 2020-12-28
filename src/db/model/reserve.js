@@ -3,11 +3,15 @@
 /* eslint-disable no-use-before-define */
 import Sequelize from 'sequelize';
 import DB from '@const/DB';
+import CONST from '@const/CONST';
 import LendingPoolContract from '@contracts/lendingPool';
 
 const {
   RESERVE_STATE,
 } = DB;
+const {
+  RESERVE_FILTER,
+} = CONST;
 
 const { Model, Op } = Sequelize;
 
@@ -110,6 +114,31 @@ class Reserve extends Model {
           isActive,
         });
       });
+    });
+  }
+
+  static findByFilter(filter, opts) {
+    const where = {
+      state: DB.RESERVE_STATE.IMPORTED,
+    };
+    if (filter === RESERVE_FILTER.MONTH) {
+      where.hour = 0;
+      where.date = 1;
+    } else if (filter === RESERVE_FILTER.WEEK) {
+      where.hour = 0;
+      where.day = 0;
+    } else if (filter === RESERVE_FILTER.DAY) {
+      where.hour = 0;
+    }
+    return Reserve.findAll({
+      ...opts,
+      where: {
+        ...where,
+        ...(opts.where || {}),
+      },
+      order: [
+        ['id', 'DESC'],
+      ],
     });
   }
 

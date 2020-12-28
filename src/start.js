@@ -1,7 +1,13 @@
 /* eslint-disable no-console */
+import Decimal from 'decimal.js-light';
 import { db, Models } from './db';
 import app from './app';
 import log from './utils/log';
+
+Decimal.config({
+  precision: 100,
+  toExpPos: 100,
+});
 
 const PORT = process.env.PORT || '3000';
 

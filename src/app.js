@@ -8,6 +8,7 @@ import '@utils/proxy';
 
 import indexRouter from './routes/index';
 import historyRouter from './routes/history';
+import aggregationRouter from './routes/aggregation';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 app.use('/api/v1/', indexRouter);
 app.use('/api/v1/history', historyRouter);
+app.use('/api/v1/aggregation', aggregationRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
