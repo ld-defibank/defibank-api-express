@@ -65,7 +65,9 @@ $ pm2 list
 
 ## API
 
-### Reserve历史
+### 历史
+
+#### Reserve
 
 此接口定期记录`LendingPool`合约的`getReserveData`和`getReserveConfigurationData`方法返回。并提供按年月日等分析。
 
@@ -82,7 +84,7 @@ GET /api/v1/history/reserve.json
 | 参数 | 必填 | 默认值 | 解释 |
 | - | - | - | - |
 | token_address | 是 | - | 币种地址 |
-| filter | 否 | hour | 维度，month,week,day,hour |
+| filter | 否 | hour | 维度，month \| week \| day \| hour |
 | limit | 否 | 10 | 返回条数 |
 
 返回
@@ -103,3 +105,28 @@ GET /api/v1/history/reserve.json
   }
 }
 ```
+
+### 聚合
+
+#### Reserve
+
+此接口用来聚合Reserve历史数据。
+
+```
+GET /api/v1/aggregation/reserve.json
+```
+
+入参
+
+```
+?token_address=0x&targets=&command=&filter=&limit=
+```
+
+| 参数 | 必填 | 默认值 | 解释 |
+| - | - | - | - |
+| token_address | 是 | - | 币种地址 |
+| targets | 是 | - | 聚合指标，liquidity_rate \| variable_borrow_rate \| stable_borrow_rate |
+| command | 是 | - | 聚合指令，avg |
+| filter | 否 | hour | 维度，month \| week \| day \| hour |
+| limit | 否 | 10 | 返回条数 |
+
