@@ -49,7 +49,6 @@ router.get('/reserve.json', argsCheck('token_address'), (req, res, next) => {
       next();
     });
   });
-
 }, jsonResponse);
 
 export default router;
